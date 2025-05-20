@@ -65,7 +65,7 @@ export const useFetchPosts = (): UseFetchPostsResult => {
               "Content-Type": "application/json",
               "x-rapidapi-host": "linkedin-api8.p.rapidapi.com",
               "x-rapidapi-key":
-                "41287747e9msh2ef0a8851132d01p1533a1jsnb77a1e6ab0f2",
+                "b250e2b195mshac1c9e7562d5325p182d2fjsn4f365cfa7a21",
             },
           }
         );

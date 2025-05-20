@@ -21,7 +21,7 @@ function App() {
         a.socialActivityCountsInsight.totalReactionCount -
         b.socialActivityCountsInsight.totalReactionCount
     );
-    if (searchQuery.trim().length === 0) return posts;
+    // if (searchQuery.trim().length === 0) return posts;
     let filtered = posts;
 
     // Apply search filter
@@ -38,6 +38,7 @@ function App() {
     }
 
     // Apply type filters
+
     filtered = filtered.filter((post) => {
       const hasReshared = Boolean(post.resharedPost);
       const hasVideo = hasReshared && Boolean(post.resharedPost?.video);
@@ -69,25 +70,24 @@ function App() {
         <SearchBar onSearch={setSearchQuery} />
         <FilterBar filters={filters} onFilterChange={setFilters} />
       </header>
-      <main className="posts-grid">
-        {filteredPosts.map((post: typeof Mock) => (
-          <PostCard key={post.urn} post={post} />
-        ))}
-      </main>
-      {error && (
-        <div className="no-results">
-          <p>{String(error)}</p>
-        </div>
-      )}
-      {loading && (
+      {loading ? (
         <div className="no-results">
           <p>Loading...</p>
         </div>
-      )}
-      {filteredPosts.length === 0 && (
+      ) : error && !posts.length ? (
+        <div className="no-results">
+          <p>{String(error)}</p>
+        </div>
+      ) : filteredPosts.length === 0 ? (
         <div className="no-results">
           <p>No posts found matching your search criteria.</p>
         </div>
+      ) : (
+        <main className="posts-grid">
+          {filteredPosts.map((post: typeof Mock) => (
+            <PostCard key={post.urn} post={post} />
+          ))}
+        </main>
       )}
     </div>
   );
